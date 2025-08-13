@@ -3,32 +3,31 @@ kind: Config
 metadata:
   name: gke-application
 build:
-# Uncomment if you're using minikube for local dev and don't want to push to Artifact Registry
-#  local: 
-#    push: false
   artifacts:
   - image: pop-stats
     context: app
     docker:
       dockerfile: Dockerfile
 deploy:
+  # The deploy stanza for the default (test) environment
   kustomize:
-    paths: 
+    paths:
       - k8s/overlays/dev
 portForward:
 - resourceType: deployment
   resourceName: pop-stats
-  port: 8080 
+  port: 8080
   localPort: 8080
 profiles:
   - name: staging
+    # The deploy stanza for the staging environment
     deploy:
       kustomize:
-        paths: 
+        paths:
           - k8s/overlays/staging
   - name: prod
+    # The deploy stanza for the prod environment
     deploy:
       kustomize:
-        paths: 
+        paths:
           - k8s/overlays/prod
-
