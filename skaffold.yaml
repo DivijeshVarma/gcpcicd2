@@ -1,7 +1,7 @@
-apiVersion: skaffold/v2beta16
+apiVersion: skaffold/v4beta13
 kind: Config
 metadata:
-  name: pop-stats
+  name: gke-application
 build:
 # Uncomment if you're using minikube for local dev and don't want to push to Artifact Registry
 #  local: 
